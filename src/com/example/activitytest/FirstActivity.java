@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,21 +22,33 @@ public class FirstActivity extends Activity{
 		setContentView(R.layout.first_layout);
 		
 		Button button1 = (Button) findViewById(R.id.button_1);
-		
 		button1.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View v){
-				/*Toast.makeText(FirstActivity.this, "You clicked Button 1",
-						Toast.LENGTH_SHORT).show();*/
-				/*Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-				startActivity(intent);*/
-//				Intent intent = new Intent("com.example.activitytest.ACTION_START");
-//				intent.addCategory("com.example.activitytest.MY_CATEGORY");
-				
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse("http://www.baidu.com"));
-				
+				Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+				startActivityForResult(intent, 1);
+			}
+		});
+		
+		Button button2 = (Button) findViewById(R.id.button_2);
+		button2.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v){
+				String data = "Hello SecondActivity";
+				Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+				intent.putExtra("extra_data", data);
 				startActivity(intent);
+			}
+		});
+		
+		Button button3 = (Button)findViewById(R.id.button_3);
+		button3.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse("tel:10086"));
+				startActivity(intent);	
 			}
 		});
 	}
@@ -63,5 +76,23 @@ public class FirstActivity extends Activity{
 		}
 		return true;
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode,int resultCode,Intent data){
+		switch (requestCode){
+			case 1:
+				if (resultCode == RESULT_OK) {
+					String returndData = data.getStringExtra("data_return");
+					Log.d("FirstActivity",returndData);
+				}
+			break;
+		default:
+		} 
+	}
+	
+	
+	
+	
+	
 	
 }

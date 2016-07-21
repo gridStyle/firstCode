@@ -8,7 +8,19 @@
         android:id="@+id/button_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button 1"
+        android:text="Open baidu search"
+        />
+    <Button
+        android:id="@+id/button_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button 2"
+        />
+    <Button 
+        android:id="@+id/button_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Call 10086"
         />
 
 </LinearLayout>
